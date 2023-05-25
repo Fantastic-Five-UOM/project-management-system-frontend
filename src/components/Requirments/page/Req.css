@@ -1,0 +1,97 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* > * {
+    font-family: "Poppins", cursive;
+    margin: 0;
+}
+
+body{
+  background: #0f0c29;  /* fallback for old browsers */
+/*  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+/*  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+/*} */
+
+
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: right;
+  text-align: center;
+}
+
+.register{
+  max-width: 978px;
+  width: 100vw;
+  display:flex;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  /* box-shadow: 1px 3px 10px #e9ecef; */
+  background-color: white;
+}
+
+.register span{
+  color: #adb5bd;
+}
+.register{
+  max-width: 978px;
+  width: 100vw;
+  display:flex;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  /* box-shadow: 1px 3px 10px #e9ecef; */
+  background-color: white;
+}
+
+.register span{
+  color: #adb5bd;
+} */
+
+.search{
+  max-width: 700px;
+  width: 100vw;
+  display:flex;
+  border-radius: 5px;
+  justify-content: left;
+  align-items: right;
+  text-align: left;
+  
+}
+
+.sch{
+    border-radius: 5px;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    
+
+
+}
+
+.card{
+    background-color: #e2eaf2;
+    margin: 2em auto;
+}
+
+.Button{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.btn{
+    justify-content: right;
+    align-items: right;
+    text-align: center;
+    width: 10vw;
+
+}
+
+.dropdown{
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    background-color: #e2eaf2;
+}
+

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 const EstimatedTime=100;
 
-const useForm = (callback,validate,projects=[]) => {
+const BudgetUseForm = (callback,validate) => {
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -17,22 +17,15 @@ const useForm = (callback,validate,projects=[]) => {
     event.preventDefault();
     setErrors(validate(values));
     setIsSubmitting(true);
-  };
+  };   
 
   const handleChange = (event) => {
     event.persist();
-    if(event.target.name=="rate"){
-      setValues(values => ({ ...values, "cost": event.target.value*values.estimatetime,"price": event.target.value*values.estimatetime+values.profit }));
+    if(event.target.name=="EstimatedHourlyRate"){
+      setValues(values => ({ ...values, "cost": event.target.value*values.estimatetime,"price": event.target.value*values.estimatetime+values.profit||0 }));
       setValues(values => ({ ...values, "price":values.cost+values.profit }));
     }else if(event.target.name=="profit"){
       setValues(values =>({ ...values, "price": parseInt(values.cost)+ parseInt( event.target.value)}));
-    }
-    else if(event.target.name=="projectId"){
-        const project=projects.find(project =>{
-          return project.id==event.target.value;
-        })
-        console.log(project)
-        setValues(values =>({ ...values, "projectName":project.name ,"actualtime":project.actualtime,"estimatetime":project.estimatetime}));
     }
     setValues(values => ({ ...values, [event.target.name]: event.target.value }));
 
@@ -42,7 +35,8 @@ const useForm = (callback,validate,projects=[]) => {
     handleChange,
     handleSubmit,
     values,
+    setValues,
     errors,
   }
 };
-export default useForm;
+export default BudgetUseForm;

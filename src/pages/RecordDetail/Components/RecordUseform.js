@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const RecordUseform= (callback,validate,projects) => {
+const RecordUseform= (callback,validate) => {
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -19,17 +19,6 @@ const RecordUseform= (callback,validate,projects) => {
   };
   const handleChange = (event) => {
     event.persist();
-    if(event.target.name=="projectId"){
-      const project=projects.find(project =>{
-        return project.id==event.target.value;
-      })
-        
-      console.log(project)
-      setValues(values =>({ ...values, "projectName":project.name }));
-  }
-
-
-
     setValues(values => ({ ...values, [event.target.name]: event.target.value }));
   };
 
@@ -37,6 +26,7 @@ const RecordUseform= (callback,validate,projects) => {
     handleChange,
     handleSubmit,
     values,
+    setValues,
     errors,
   }
 };

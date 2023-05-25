@@ -1,0 +1,51 @@
+.App {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: right;
+   text-align: left;
+   margin-left: auto;
+ }
+
+.card{
+   max-width: 700px;
+   width: 200vw;
+   height: 700px;
+   display:flex;
+   border: 1px solid #e9ecef;
+   border-radius: 5px;
+   background-color: white;
+ }
+ 
+ .card-body{
+   width: 480px;
+   height: 100%;
+   object-fit: cover;
+   align-self: flex-end;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+ }
+
+ #Form > .mb-3{
+   border: 1px solid #e9ecef;
+   padding: .9em 1em;
+ }
+ 
+ #Form > input:focus{
+   outline: none;
+ }
+ 
+ #Form > .btn{
+   background-color: #003049;
+   color: #e9ecef;
+   font-size: 1em;
+   cursor: pointer;
+ }
+
+ .Field{
+   padding-left: 10%;
+ }
+
+ .Form.Control{
+ padding: 10px;
+ }

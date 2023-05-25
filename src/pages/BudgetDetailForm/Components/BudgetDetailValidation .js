@@ -6,8 +6,8 @@ export default function validate(values) {
     if (!values.projectId  ) {
         errors.projectId = 'project ID is required';
     }
-    if(!values.rate){
-        errors.rate= 'Estimated Hourly Rate  is required';
+    if(!values.EstimatedHourlyRate){
+        errors.EstimatedHourlyRate= 'Estimated Hourly Rate  is required';
     }
     if(!values.cost){
         errors.cost= 'cost by is required'

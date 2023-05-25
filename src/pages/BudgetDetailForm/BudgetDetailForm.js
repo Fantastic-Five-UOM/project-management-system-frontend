@@ -2,18 +2,19 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import { Row } from "react-bootstrap";
-import { Dropdown } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import validate from "./Components/LoginFormValidationRules";
-import useForm from "./Components/useForm";
+import validate from "./Components/BudgetDetailValidation ";
+import BudgetUseForm from "./Components/BudgetUseForm";
 import axios from 'axios';
 import "./BudgetDetailForm.css";
+import { useParams } from "react-router-dom";
+
 
 const now = 60;
 const now2 = 1;
-
 function BudgetDetailForm() {
+  const {projectId}=useParams();
+
   const submit = () => {
 
     console.log(values)
@@ -21,10 +22,10 @@ function BudgetDetailForm() {
     .post('http://localhost:5148/api/Budget',
     {
      // Id:values.projectId,
-      Received:0,
+      Received:0, 
       yetToReceive:values.price,
-      actualcost: values.actualtime*values.rate,
-      hourlyCost:values.rate,
+      actualcost: values.actualtime*values.EstimatedHourlyRate,
+      hourlyCost:values.EstimatedHourlyRate,
       plannedcost: values.cost,
       totalBudget:values.price,
      
@@ -38,32 +39,25 @@ function BudgetDetailForm() {
         console.log(Error)
     })
   };
-  const [projects, setProjects]=useState([])
-  const { values, handleChange, handleSubmit, errors } = useForm(
+  const { values,setValues, handleChange, handleSubmit, errors } = BudgetUseForm(
     submit,
-    validate,
-    projects
+    validate
   );
 
   
   useEffect(()=>{
     axios
-    .get('http://localhost:5148/api/Poject')
+    .get(`http://localhost:5148/api/Project/${projectId}`)
     .then (
-      Response=>{ 
-        setProjects(Response.data.result)
+      Response=>{
+        console.log(Response.data.result)
+        setValues(values =>({ ...values, "projectName":Response.data.result.name,"estimatetime":Response.data.result.estimatetime,"actualtime":Response.data.result.actualtime,"projectId":Response.data.result.id}));
     })
     .catch(
       Error=> {
         console.log(Error)
     })
   },[])
-
-  useEffect(()=>{
-    console.log(values)
-  },[values]
-
-  )
 
   return (
     <div className="App">
@@ -90,12 +84,12 @@ function BudgetDetailForm() {
           controlId="exampleForm.ControlInput1"
         >
           <Form.Label>project ID</Form.Label>
-          <Form.Select name="projectId" onChange={handleChange} aria-label="Default select example">
-           { projects.map((project)=>
-            <option value={project.id}>{project.id}</option>
-           )}
-            
-          </Form.Select>
+          <Form.Control
+            type="text"
+            name="projectId"
+            value={values.projectId || ""}
+            readOnly={true}
+          />
           {errors.projectid && (
             <p className="help danger" style={{ color: "red" }}>
               {errors.projectid}
@@ -111,16 +105,16 @@ function BudgetDetailForm() {
             <InputGroup className="price" controlId="exampleForm.ControlInput1">
               <Form.Control
                 type="number"
-                name="rate"
+                name="EstimatedHourlyRate"
                 onChange={handleChange}
-                value={values.rate || 0}
+                value={values.EstimatedHourlyRate|| 0}
                 aria-label="Amount (to the nearest Rupeels)"
               />
               <InputGroup.Text>LKR</InputGroup.Text>
             </InputGroup>
-            {errors.rate && (
+            {errors.EstimatedHourlyRate && (
               <p className="help danger" style={{ color: "red" }}>
-                {errors.rate}
+                {errors.EstimatedHourlyRate}
               </p>
             )}
           </Col>
@@ -204,14 +198,14 @@ function BudgetDetailForm() {
           )}
           <div>
             <Button
-              style={{ width: "100px", height: "50px", margin: "10px" }}
+              style={{ width: "100px", height: "50px", margin: "10px",backgroundColor:"red" }}
               className="me-1 float-end"
               type="submit"
             >
               Add
             </Button>
             <Button 
-              style={{ width: "100px", height: "50px", margin: "10px" }}
+              style={{ width: "100px", height: "50px", margin: "10px"  }}
               className="me-1 float-end"
               type="reset"
             >
